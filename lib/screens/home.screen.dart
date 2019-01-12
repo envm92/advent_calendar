@@ -9,7 +9,6 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
-
   var todayDate = new DateTime.now();
   var nextChristmas;
   var isChristmas = false;
@@ -26,25 +25,102 @@ class _HomeState extends State<Home> {
 
   @override
   Widget build(BuildContext context) {
-    var format = DateFormat.yMMMd(Translate.of(context).getLocation());
+    var format = DateFormat.MMMM(Translate.of(context).getLocation());
     return Scaffold(
-      appBar: AppBar(
-        title: Text(Translate.of(context).getMessage('home', 'title')),
-      ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
+        body: Column(
           children: <Widget>[
-            Text(
-                Translate.of(context).getMessage('home', 'today_date')
+            Container(
+              height: 150,
+              child: new Row(
+                children: <Widget>[
+                  Expanded(
+                    child: new Container(
+                      padding: new EdgeInsets.only(left: 8.0),
+                      child: new Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        mainAxisAlignment: MainAxisAlignment.spaceAround,
+                        children: <Widget>[
+                          new Text(
+                            Translate.of(context).getMessage('home',
+                                (isChristmas) ? 'isChristmas' : 'isNotChristmas'),
+                            style: Theme
+                                .of(context)
+                                .textTheme
+                                .title
+                                .copyWith(
+                                fontWeight: FontWeight.bold,
+                                color: Theme
+                                    .of(context)
+                                    .primaryColor,
+                                fontSize: 30),
+                          )
+                        ],
+                      ),
+                    ),
+                  ),
+                  Container(
+                    child: new Column(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      children: <Widget>[
+                        Container(
+                          height: 100,
+                          width: 100,
+                          padding: const EdgeInsets.all(8.0),
+                          alignment: Alignment.center,
+                          child: Column(
+                            children: <Widget>[
+                              Text(
+                                todayDate.year.toString(),
+                                style: Theme
+                                    .of(context)
+                                    .textTheme
+                                    .subtitle
+                                    .copyWith(
+                                    color: Theme
+                                        .of(context)
+                                        .accentColor,
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 12),
+                              ),
+                              Text(
+                                '${format.format(todayDate)[0]
+                                    .toUpperCase()}${format.format(todayDate)
+                                    .substring(1)}',
+                                style: Theme
+                                    .of(context)
+                                    .textTheme
+                                    .title
+                                    .copyWith(
+                                    fontWeight: FontWeight.bold, fontSize: 12),
+                              ),
+                              Text(todayDate.day.toString(),
+                                  style: Theme
+                                      .of(context)
+                                      .textTheme
+                                      .headline
+                                      .copyWith(fontSize: 45))
+                            ],
+                          ),
+                          foregroundDecoration: BoxDecoration(
+                              color: Color.fromRGBO(228, 182, 100, 0.54),
+                              borderRadius:
+                              new BorderRadius.all(Radius.circular(20.0))),
+                          transform: Matrix4.rotationZ(0.1),
+                        )
+                      ],
+                    ),
+                  )
+                ],
+              ),
             ),
-            Text(
-              format.format(todayDate),
-            ),
-            Countdown(nextChristmas)
+            Expanded(
+              child: Center(
+                child: Countdown(nextChristmas),
+              )
+            )
           ],
-        ),
-      ),
+        )
     );
   }
+
 }

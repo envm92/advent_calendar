@@ -16,7 +16,9 @@ class Translate {
     'en': {
       'home' : {
         'title'           : 'Advent Calendar',
-        'today_date'      : 'Today\'s date'
+        'today_date'      : 'Today\'s date',
+        'isChristmas'     : 'Today is Christmas!',
+        'isNotChristmas'  : 'Today isn\'t Christmas'
       },
       'countdown' : {
         'days'            : 'days',
@@ -26,7 +28,9 @@ class Translate {
     'es': {
       'home' : {
         'title'           : 'Calendario de adviento',
-        'today_date'      : 'Hoy es'
+        'today_date'      : 'Hoy es',
+        'isChristmas'     : '¡Hoy es navidad!',
+        'isNotChristmas'  : 'Hoy no es navidad'
       },
       'countdown' : {
         'days'            : 'días',

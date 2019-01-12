@@ -46,12 +46,19 @@ class _CountdownState extends State<Countdown> {
     final days = remaining.inDays;
     var hours = remaining.inHours - remaining.inDays * 24;
     if (days > 0) {
-      var daysText = 'days';
-      if (days == 1) { daysText = 'day';}
-      texts.add(Text('$days '+ Translate.of(context).getMessage('countdown', daysText)));
+      texts.add(Text(
+        '$days '+ Translate.of(context).getMessage('countdown', (days == 1)? 'day': 'days') ,
+        style: Theme.of(context).textTheme.title.copyWith(
+            fontWeight: FontWeight.bold
+        )
+      ));
     }
     texts.add(Text('$hours:${format.format(
-        DateTime.fromMillisecondsSinceEpoch(remaining.inMilliseconds))}'));
+        DateTime.fromMillisecondsSinceEpoch(remaining.inMilliseconds))}',
+        style: Theme.of(context).textTheme.headline.copyWith(
+            fontWeight: FontWeight.bold,
+            color: Theme.of(context).primaryColor
+        )));
 
     return Column(
       children: texts
